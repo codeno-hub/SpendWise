@@ -1,0 +1,72 @@
+/* css/tables.css */
+
+/* ── Generic data table ──────────────────── */
+.data-table {
+  width: 100%;
+  font-size: 13px;
+}
+.data-table th {
+  text-align: left;
+  padding: 0 12px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-2); }
+.data-table td.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+/* ── Monthly breakdown table ─────────────── */
+.monthly-table {
+  width: 100%;
+  font-size: 12px;
+  min-width: 880px;
+}
+.monthly-table th {
+  text-align: center;
+  padding: 6px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border-bottom: 2px solid var(--border);
+}
+.monthly-table th:first-child { text-align: left; width: 160px; }
+.monthly-table td {
+  padding: 7px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+}
+.monthly-table td:first-child { text-align: left; font-weight: 600; color: var(--text-1); }
+.monthly-table td.mono { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-1); }
+.monthly-table td.empty { color: var(--text-3); }
+.monthly-table td.annually { background: var(--accent-bg); font-weight: 700; color: var(--accent) !important; font-family: var(--font-mono); }
+
+/* Section header rows */
+.monthly-table .hdr-income   td { background: #1A3A6B; color: #fff; font-weight: 700; font-size: 11px; padding: 6px 10px; }
+.monthly-table .hdr-savings  td { background: #145C40; color: #fff; font-weight: 700; font-size: 11px; padding: 6px 10px; }
+.monthly-table .hdr-expenses td { background: #5B3B1A; color: #fff; font-weight: 700; font-size: 11px; padding: 6px 10px; }
+
+/* Total rows */
+.monthly-table .total-row td {
+  background: var(--surface-2);
+  font-weight: 700;
+  color: var(--text-1);
+}
+.monthly-table .total-row td.mono { font-family: var(--font-mono); }

@@ -1,0 +1,28 @@
+/* css/responsive.css */
+@media (max-width: 1100px) {
+  .charts-row    { grid-template-columns: 1fr 1fr; }
+  .summary-bar   { grid-template-columns: 1fr 1fr; }
+  .analytics-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 760px) {
+  .charts-row    { grid-template-columns: 1fr; }
+  .summary-bar   { grid-template-columns: 1fr 1fr; }
+  .analytics-row { grid-template-columns: 1fr; }
+  .form-row      { flex-direction: column; }
+  .form-group--sm { max-width: 100%; }
+  .form-submit   { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 620px) {
+  .sidebar { display: none; }
+  .main    { margin-left: 0; }
+  .content { padding: 14px; gap: 14px; }
+  .topbar  { padding: 0 14px; }
+  .summary-bar { grid-template-columns: 1fr; }
+  .tabs { flex-wrap: wrap; width: 100%; }
+  .tab-btn { flex: 1; text-align: center; min-width: 80px; }
+  .txn-controls { flex-direction: column; }
+  .txn-controls .sel,
+  .txn-controls .inp { max-width: 100%; width: 100%; }
+}

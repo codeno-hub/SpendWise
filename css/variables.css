@@ -1,0 +1,45 @@
+/* css/variables.css — design tokens */
+:root {
+  /* Colors */
+  --bg:           #F2EFE9;
+  --surface:      #FDFCFA;
+  --surface-2:    #F5F2EC;
+  --border:       #E6E1D8;
+  --text-1:       #18150F;
+  --text-2:       #6B6560;
+  --text-3:       #A8A39C;
+
+  --accent:       #1B4FD8;
+  --accent-bg:    #EBF0FD;
+  --green:        #1E9E6B;
+  --green-bg:     #E3F5EE;
+  --orange:       #D95B1A;
+  --orange-bg:    #FDEEE5;
+  --red:          #C93232;
+  --red-bg:       #FDE8E8;
+  --yellow:       #E8A838;
+
+  /* Category palette */
+  --c0:  #1B4FD8; --c1:  #1E9E6B; --c2:  #D95B1A; --c3:  #C46BDE;
+  --c4:  #E8A838; --c5:  #3BB8CF; --c6:  #C93232; --c7:  #7B6FDE;
+  --c8:  #4CAF7E; --c9:  #E06B9A; --c10: #8B7355; --c11: #5B8EF0;
+
+  /* Shadows */
+  --shadow-s: 0 1px 4px rgba(24,21,15,.05), 0 1px 2px rgba(24,21,15,.04);
+  --shadow-m: 0 4px 20px rgba(24,21,15,.07), 0 2px 6px rgba(24,21,15,.04);
+  --shadow-l: 0 12px 44px rgba(24,21,15,.10);
+
+  /* Radius */
+  --r-s: 6px;  --r-m: 12px;  --r-l: 18px;  --r-full: 9999px;
+
+  /* Typography */
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --font-mono:  'DM Mono', monospace;
+  --font-serif: 'Fraunces', Georgia, serif;
+
+  /* Layout */
+  --sidebar-w:    230px;
+  --topbar-h:     58px;
+  --content-gap:  18px;
+  --content-pad:  28px;
+}

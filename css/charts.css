@@ -1,0 +1,75 @@
+/* css/charts.css */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-m);
+  box-shadow: var(--shadow-s);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.chart-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.chart-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.chart-toggle {
+  display: flex;
+  gap: 3px;
+}
+.ct-btn {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  transition: all 0.15s;
+  cursor: pointer;
+  background: none;
+}
+.ct-btn:hover { background: var(--surface-2); color: var(--text-2); }
+.ct-btn.active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.chart-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 180px;
+}
+.chart-wrap--sm {
+  min-height: 160px;
+  max-height: 180px;
+  margin: 0 auto;
+  width: 100%;
+}
+.chart-legend {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.leg-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.leg-left { display: flex; align-items: center; gap: 7px; }
+.leg-dot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.leg-name { color: var(--text-2); font-weight: 500; }
+.leg-pct  { color: var(--text-3); font-size: 10px; margin-left: 2px; }
+.leg-val  { font-family: var(--font-mono); font-size: 12px; color: var(--text-1); font-weight: 500; }
+.leg-empty { text-align: center; color: var(--text-3); font-size: 12px; padding: 12px 0; }

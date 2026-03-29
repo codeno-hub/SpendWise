@@ -1,0 +1,21 @@
+/* css/animations.css */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideRow {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.03); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.anim-row    { animation: fadeSlideRow 0.22s ease; }
+.anim-card   { animation: fadeSlideIn  0.25s ease; }
+.anim-pulse  { animation: pulse        0.35s ease; }
