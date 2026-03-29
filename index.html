@@ -3,19 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SpendWise — Personal Finance Dashboard</title>
+  <title>SpendWise</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:wght@700;900&display=swap" rel="stylesheet" />
-
-  <!-- Chart.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
 </head>
@@ -27,66 +16,62 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar__logo">
         <div class="logo-mark">Spend<em>Wise</em></div>
-        <div class="logo-sub">Finance Dashboard</div>
       </div>
 
-      <nav class="sidebar__nav" role="navigation">
-        <button class="nav-item active">Dashboard</button>
-        <button class="nav-item">Transactions</button>
-        <button class="nav-item">Categories</button>
+      <nav class="sidebar__nav">
+        <button class="nav-item active" data-nav="dashboard">Dashboard</button>
+        <button class="nav-item" data-nav="transactions">Transactions</button>
+        <button class="nav-item" data-nav="categories">Categories</button>
       </nav>
     </aside>
 
     <!-- Main -->
     <div class="main">
 
-      <!-- Topbar -->
       <header class="topbar">
         <button id="sidebar-toggle">☰</button>
-        <h1 class="topbar__title">Dashboard</h1>
+        <h1>Dashboard</h1>
       </header>
 
-      <!-- Content -->
       <div class="content">
 
-        <!-- Tabs -->
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="income">Income</button>
-          <button class="tab-btn" data-tab="expense">Expense</button>
-          <button class="tab-btn" data-tab="savings">Savings</button>
+        <!-- DASHBOARD -->
+        <div data-section="dashboard">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="income">Income</button>
+            <button class="tab-btn" data-tab="expense">Expense</button>
+            <button class="tab-btn" data-tab="savings">Savings</button>
+          </div>
+
+          <div id="tab-income" class="tab-panel">
+            <input id="inc-name" data-action="add-income" placeholder="Source" />
+            <input id="inc-amount" data-action="add-income" type="number" placeholder="Amount" />
+            <button data-action="add-income">Add Income</button>
+          </div>
+
+          <div id="tab-expense" class="tab-panel hidden">
+            <input id="exp-desc" data-action="add-expense" placeholder="Description" />
+            <input id="exp-amount" data-action="add-expense" type="number" placeholder="Amount" />
+            <button data-action="add-expense">Add Expense</button>
+          </div>
+
+          <div id="tab-savings" class="tab-panel hidden">
+            <input id="sav-name" data-action="add-savings" placeholder="Goal" />
+            <input id="sav-amount" data-action="add-savings" type="number" placeholder="Amount" />
+            <button data-action="add-savings">Add Savings</button>
+          </div>
         </div>
 
-        <!-- Income Tab -->
-        <div id="tab-income" class="tab-panel">
-          <input id="inc-name" data-action="add-income" placeholder="Source" />
-          <input id="inc-amount" data-action="add-income" type="number" placeholder="Amount" />
-          <button data-action="add-income">Add Income</button>
+        <!-- TRANSACTIONS -->
+        <div data-section="transactions" class="hidden">
+          <h2>Transactions</h2>
+          <p>No transactions yet 👀</p>
         </div>
 
-        <!-- Expense Tab -->
-        <div id="tab-expense" class="tab-panel hidden">
-          <input id="exp-desc" data-action="add-expense" placeholder="Description" />
-          <input id="exp-amount" data-action="add-expense" type="number" placeholder="Amount" />
-          <button data-action="add-expense">Add Expense</button>
-        </div>
-
-        <!-- Savings Tab -->
-        <div id="tab-savings" class="tab-panel hidden">
-          <input id="sav-name" data-action="add-savings" placeholder="Goal" />
-          <input id="sav-amount" data-action="add-savings" type="number" placeholder="Amount" />
-          <button data-action="add-savings">Add Savings</button>
-        </div>
-
-        <!-- Charts -->
-        <div class="charts">
-          <button class="ct-btn" data-chart="main" data-type="bar">Bar</button>
-          <button class="ct-btn" data-chart="main" data-type="line">Line</button>
-          <canvas id="main-chart"></canvas>
-        </div>
-
-        <!-- Transactions -->
-        <div id="txn-area">
-          <p class="empty-state">No transactions yet 👀</p>
+        <!-- CATEGORIES -->
+        <div data-section="categories" class="hidden">
+          <h2>Categories</h2>
+          <p>Manage your categories here</p>
         </div>
 
       </div>
@@ -94,10 +79,8 @@
 
   </div>
 
-  <!-- Toast -->
   <div id="toast" class="toast"></div>
 
-  <!-- Scripts -->
   <script src="js/ui.js"></script>
   <script src="js/app.js"></script>
 </body>
