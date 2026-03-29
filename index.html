@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SpendWise — Personal Finance Dashboard. Track spending, set budgets, visualize your financial health." />
+  <title>SpendWise — Personal Finance Dashboard</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Fraunces:wght@700;900&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+
+  <!-- Stylesheets (loaded in order) -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/charts.css" />
+  <link rel="stylesheet" href="css/tables.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ── Sidebar ──────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__logo">
+      <div class="logo-mark">Spend<em>Wise</em></div>
+      <div class="logo-sub">Finance Dashboard</div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <div class="nav-section-label">Overview</div>
+      <a class="nav-item active"><span class="nav-icon">◈</span> Dashboard</a>
+      <div class="nav-section-label">Manage</div>
+      <a class="nav-item"><span class="nav-icon">⊞</span> Transactions</a>
+      <a class="nav-item"><span class="nav-icon">◎</span> Categories</a>
+      <a class="nav-item"><span class="nav-icon">⟳</span> Recurring</a>
+      <div class="nav-section-label">Reports</div>
+      <a class="nav-item"><span class="nav-icon">↗</span> Trends</a>
+      <a class="nav-item"><span class="nav-icon">◉</span> Analytics</a>
+    </nav>
+
+    <div class="sidebar__currency">
+      <div class="currency-label">Currency</div>
+      <div class="currency-grid" id="cur-grid"></div>
+    </div>
+
+    <div class="sidebar__footer">
+      <strong>SpendWise v2.0</strong>
+      Data stored locally
+    </div>
+  </aside>
+
+  <!-- ── Main ─────────────────────────────────────────────────── -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar__title">Your Financial Overview</div>
+      <div class="topbar__right">
+        <span class="pill" id="month-badge"></span>
+        <span class="pill pill--accent" id="cur-badge">$ USD</span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- Summary -->
+      <section class="summary-bar">
+        <div class="sum-card sum-card--income">
+          <div class="sum-label">💼 Income</div>
+          <div class="sum-value" id="sum-income">—</div>
+          <div class="sum-sub"  id="sum-income-sub"></div>
+        </div>
+        <div class="sum-card sum-card--savings">
+          <div class="sum-label">🏦 Savings Goal</div>
+          <div class="sum-value" id="sum-savings">—</div>
+          <div class="sum-sub"  id="sum-savings-sub"></div>
+        </div>
+        <div class="sum-card sum-card--expenses">
+          <div class="sum-label">🛒 Expenses</div>
+          <div class="sum-value" id="sum-expenses">—</div>
+          <div class="sum-sub"  id="sum-exp-sub"></div>
+        </div>
+        <div class="sum-card sum-card--potential">
+          <div class="sum-label">✨ Potential to Save</div>
+          <div class="sum-value" id="sum-potential">—</div>
+          <div class="sum-sub"  id="sum-pot-sub"></div>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="charts-row">
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <span class="chart-title">Income vs Expenses</span>
+            <div class="chart-toggle">
+              <button class="ct-btn active" onclick="setChartType('main','bar',this)">Bar</button>
+              <button class="ct-btn"        onclick="setChartType('main','line',this)">Line</button>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="main-chart"></canvas></div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <span class="chart-title">Spending Breakdown</span>
+            <div class="chart-toggle">
+              <button class="ct-btn active" onclick="setChartType('cat','doughnut',this)">Donut</button>
+              <button class="ct-btn"        onclick="setChartType('cat','pie',this)">Pie</button>
+              <button class="ct-btn"        onclick="setChartType('cat','polarArea',this)">Polar</button>
+            </div>
+          </div>
+          <div class="chart-wrap chart-wrap--sm"><canvas id="cat-chart"></canvas></div>
+          <div class="chart-legend" id="cat-legend"></div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <span class="chart-title">Monthly Trend</span>
+            <div class="chart-toggle">
+              <button class="ct-btn active" onclick="setChartType('trend','line',this)">Line</button>
+              <button class="ct-btn"        onclick="setChartType('trend','bar',this)">Bar</button>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="trend-chart"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Analytics -->
+      <section class="analytics-row" id="analytics-row"></section>
+
+      <!-- Data Entry -->
+      <section class="card">
+        <div class="section-title">📝 Enter Data</div>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('income',this)">Income</button>
+          <button class="tab-btn"        onclick="switchTab('savings',this)">Savings</button>
+          <button class="tab-btn"        onclick="switchTab('expense',this)">Expense</button>
+          <button class="tab-btn"        onclick="switchTab('categories',this)">Manage Categories</button>
+        </div>
+
+        <div id="tab-income" class="tab-panel">
+          <div class="form-row">
+            <div class="form-group"><label for="inc-name">Source Name</label><input class="inp" id="inc-name" placeholder="e.g. Paycheck 1" /></div>
+            <div class="form-group form-group--sm"><label for="inc-amount">Amount</label><input class="inp" id="inc-amount" type="number" min="0.01" step="0.01" placeholder="0.00" /></div>
+            <div class="form-group form-group--sm"><label for="inc-date">Date</label><input class="inp" id="inc-date" type="date" /></div>
+            <div class="form-group form-group--sm"><label for="inc-freq">Frequency</label>
+              <select class="sel" id="inc-freq"><option>One-time</option><option>Monthly</option><option>Weekly</option><option>Annual</option></select>
+            </div>
+            <button class="btn btn--primary form-submit" onclick="addIncome()">＋ Add Income</button>
+          </div>
+          <div id="income-list" class="entry-list"></div>
+        </div>
+
+        <div id="tab-savings" class="tab-panel hidden">
+          <div class="form-row">
+            <div class="form-group"><label for="sav-name">Goal Name</label><input class="inp" id="sav-name" placeholder="e.g. Emergency Fund" /></div>
+            <div class="form-group form-group--sm"><label for="sav-amount">Monthly Amount</label><input class="inp" id="sav-amount" type="number" min="0.01" step="0.01" placeholder="0.00" /></div>
+            <div class="form-group form-group--sm"><label for="sav-target">Target</label><input class="inp" id="sav-target" type="number" placeholder="Optional" /></div>
+            <button class="btn btn--primary form-submit" onclick="addSavings()">＋ Add Goal</button>
+          </div>
+          <div id="savings-list" class="entry-list"></div>
+        </div>
+
+        <div id="tab-expense" class="tab-panel hidden">
+          <div class="form-row">
+            <div class="form-group"><label for="exp-desc">Description</label><input class="inp" id="exp-desc" placeholder="e.g. Groceries" /></div>
+            <div class="form-group form-group--sm"><label for="exp-amount">Amount</label><input class="inp" id="exp-amount" type="number" min="0.01" step="0.01" placeholder="0.00" /></div>
+            <div class="form-group form-group--sm"><label for="exp-cat">Category</label><select class="sel" id="exp-cat"></select></div>
+            <div class="form-group form-group--sm"><label for="exp-subcat">Sub-Category</label><input class="inp" id="exp-subcat" placeholder="Optional" /></div>
+            <div class="form-group form-group--sm"><label for="exp-date">Date</label><input class="inp" id="exp-date" type="date" /></div>
+            <button class="btn btn--primary form-submit" onclick="addExpense()">＋ Add</button>
+          </div>
+        </div>
+
+        <div id="tab-categories" class="tab-panel hidden">
+          <div class="cat-manager">
+            <div class="cat-manager__title">Your Expense Categories</div>
+            <div class="cat-chip-list" id="cat-chip-list"></div>
+            <div class="cat-add-row">
+              <input class="inp" id="new-cat-name" placeholder="New category name…" />
+              <button class="btn btn--primary btn--sm" onclick="openCatModal()">＋ Add</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Monthly Breakdown -->
+      <section class="card">
+        <div class="section-title">📆 Monthly Breakdown</div>
+        <p class="hint-text">Enter data above — this table generates automatically.</p>
+        <div class="table-scroll"><table class="monthly-table" id="monthly-table"></table></div>
+      </section>
+
+      <!-- Transactions -->
+      <section class="card">
+        <div class="section-title">📋 Transaction History</div>
+        <div class="txn-controls">
+          <input class="inp txn-search" id="txn-search" placeholder="🔍  Search…" oninput="renderTxns()" />
+          <select class="sel" id="txn-filter-cat" onchange="renderTxns()"><option value="">All Categories</option></select>
+          <select class="sel" id="txn-filter-type" onchange="renderTxns()">
+            <option value="">All Types</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+            <option value="savings">Savings</option>
+          </select>
+          <button class="btn btn--ghost btn--sm" onclick="exportCSV()">⬇ Export CSV</button>
+        </div>
+        <div id="txn-area"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal__title">Choose Category Color</div>
+      <div class="color-grid" id="color-grid"></div>
+      <div class="modal__actions">
+        <button class="btn btn--ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn btn--primary" onclick="confirmAddCat()">Add Category</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- JS modules (order matters) -->
+  <script src="js/config.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/currency.js"></script>
+  <script src="js/categories.js"></script>
+  <script src="js/income.js"></script>
+  <script src="js/savings.js"></script>
+  <script src="js/expenses.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/monthly.js"></script>
+  <script src="js/transactions.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

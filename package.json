@@ -1,0 +1,15 @@
+{
+  "name": "spendwise",
+  "version": "2.0.0",
+  "description": "A beautiful, zero-dependency personal finance dashboard that runs in your browser.",
+  "author": "SpendWise Contributors",
+  "license": "MIT",
+  "keywords": ["finance", "budget", "expense-tracker", "dashboard", "vanilla-js", "no-backend"],
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "serve": "npx serve .",
+    "open": "open index.html"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
