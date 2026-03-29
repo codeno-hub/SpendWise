@@ -39,6 +39,26 @@ document.addEventListener('keydown', e => {
   if (id === 'new-cat-name')                     openCatModal();
 });
 
+// ── Sidebar toggle ─────────────────────────
+const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('sidebar-toggle');
+
+function setSidebarState() {
+  if (!sidebar) return;
+  if (window.innerWidth > 620) {
+    sidebar.classList.add('open');
+  } else {
+    sidebar.classList.remove('open');
+  }
+}
+
+setSidebarState();
+window.addEventListener('resize', setSidebarState);
+
+sidebarToggle?.addEventListener('click', () => {
+  sidebar?.classList.toggle('open');
+});
+
 // ── Close modal on overlay click ─────────────
 document.getElementById('modal-overlay').addEventListener('click', function (e) {
   if (e.target === this) closeModal();
